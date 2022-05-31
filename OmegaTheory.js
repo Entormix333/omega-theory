@@ -37,7 +37,7 @@ var init = () => {
     {
         let getDesc = (level) => "c_2=2^{" + level + "}";
         let getInfo = (level) => "c_2=" + getC2(level).toString(0);
-        c2 = theory.createUpgrade(1, currency, new ExponentialCost(1e3, Math.log2(10)));
+        c2 = theory.createUpgrade(1, currency, new FirstFreeCost(new ExponentialCost(1e3, Math.log2(10))));
         c2.getDescription = (_) => Utils.getMath(getDesc(c2.level));
         c2.getInfo = (amount) => Utils.getMathTo(getInfo(c2.level), getInfo(c2.level + amount));
     }
@@ -46,7 +46,7 @@ var init = () => {
     {
         let getDesc = (level) => "c_3=2^{" + level + "}";
         let getInfo = (level) => "c_3=" + getC3(level).toString(0);
-        c3 = theory.createUpgrade(2, currency, new ExponentialCost(1e5, Math.log2(20)));
+        c3 = theory.createUpgrade(2, currency, new FirstFreeCost(new ExponentialCost(1e5, Math.log2(20))));
         c3.getDescription = (_) => Utils.getMath(getDesc(c3.level));
         c3.getInfo = (amount) => Utils.getMathTo(getInfo(c3.level), getInfo(c3.level + amount));
     }
@@ -55,7 +55,7 @@ var init = () => {
      {
         let getDesc = (level) => "c_4=2^{" + level + "}";
         let getInfo = (level) => "c_4=" + getC4(level).toString(0);
-        c4 = theory.createUpgrade(3, currency, new ExponentialCost(1e8, Math.log2(50)));
+        c4 = theory.createUpgrade(3, currency, new FirstFreeCost(new ExponentialCost(1e8, Math.log2(50))));
         c4.getDescription = (_) => Utils.getMath(getDesc(c4.level));
         c4.getInfo = (amount) => Utils.getMathTo(getInfo(c4.level), getInfo(c4.level + amount));
     }
@@ -63,7 +63,7 @@ var init = () => {
      {
         let getDesc = (level) => "c_5=2^{" + level + "}";
         let getInfo = (level) => "c_5=" + getC5(level).toString(0);
-        c5 = theory.createUpgrade(4, currency, new ExponentialCost(1e10, Math.log2(100)));
+        c5 = theory.createUpgrade(4, currency, new FirstFreeCost(new ExponentialCost(1e10, Math.log2(100))));
         c5.getDescription = (_) => Utils.getMath(getDesc(c5.level));
         c5.getInfo = (amount) => Utils.getMathTo(getInfo(c5.level), getInfo(c5.level + amount));
     }
@@ -72,7 +72,7 @@ var init = () => {
     {
         let getDesc = (level) => "c_6=2^{" + level + "}";
         let getInfo = (level) => "c_6=" + getC6(level).toString(0);
-        c6 = theory.createUpgrade(5, currency, new ExponentialCost(1e13, Math.log2(200)));
+        c6 = theory.createUpgrade(5, currency, new FirstFreeCost(new ExponentialCost(1e13, Math.log2(200))));
         c6.getDescription = (_) => Utils.getMath(getDesc(c6.level));
         c6.getInfo = (amount) => Utils.getMathTo(getInfo(c6.level), getInfo(c6.level + amount));
     }
@@ -81,7 +81,7 @@ var init = () => {
     {
         let getDesc = (level) => "c_7=2^{" + level + "}";
         let getInfo = (level) => "c_7=" + getC7(level).toString(0);
-        c7 = theory.createUpgrade(6, currency, new ExponentialCost(1e18, Math.log2(500)));
+        c7 = theory.createUpgrade(6, currency, new FirstFreeCost(new ExponentialCost(1e18, Math.log2(500))));
         c7.getDescription = (_) => Utils.getMath(getDesc(c7.level));
         c7.getInfo = (amount) => Utils.getMathTo(getInfo(c7.level), getInfo(c7.level + amount));
     }
@@ -90,7 +90,7 @@ var init = () => {
     {
         let getDesc = (level) => "c_8=2^{" + level + "}";
         let getInfo = (level) => "c_8=" + getC8(level).toString(0);
-        c8 = theory.createUpgrade(7, currency, new ExponentialCost(1e22, Math.log2(1000)));
+        c8 = theory.createUpgrade(7, currency, new FirstFreeCost(new ExponentialCost(1e22, Math.log2(1000))));
         c8.getDescription = (_) => Utils.getMath(getDesc(c8.level));
         c8.getInfo = (amount) => Utils.getMathTo(getInfo(c8.level), getInfo(c8.level + amount));
     }
@@ -227,14 +227,14 @@ var init = () => {
     /////////////////
     //// Achievements
     achievement1 = theory.createAchievement(0, "Start greek", "Buy 1 c1.", () => c1.level > 0);
-    achievement2 = theory.createSecretAchievement(1, "You 2 C", "Buy 1 c2.", "While 2 c", () => c2.level > 0);
-    achievement3 = theory.createSecretAchievement(2, "Tirman", "Buy 1 c3.", "Collecting this three?", () => c3.level > 0);
-    achievement4 = theory.createSecretAchievement(3, "Goodspeed!", "Buy 1 c4.", "Yes", () => c4.level > 0);
-    achievement5 = theory.createSecretAchievement(4, "Nice Jackpot!", "Buy 1 c5.", "Monkes", () => c5.level > 0);
+    achievement2 = theory.createSecretAchievement(1, "You 2 C", "Buy 2 c2.", "While 2 c", () => c2.level > 1);
+    achievement3 = theory.createSecretAchievement(2, "Tirman", "Buy 2 c3.", "Collecting this three?", () => c3.level > 1);
+    achievement4 = theory.createSecretAchievement(3, "Goodspeed!", "Buy 2 c4.", "Yes", () => c4.level > 1);
+    achievement5 = theory.createSecretAchievement(4, "Nice Jackpot!", "Buy 2 c5.", "Monkes", () => c5.level > 1);
     achievement6 = theory.createSecretAchievement(5, "1 Monkey", "first monkey!?!??!?", "1 Monkes", () => currency_M.value > 1);
-    achievement7 = theory.createSecretAchievement(6, "What This Happend?", "Buy 1 c6.", "Filled", () => c6.level > 0);
-    achievement8 = theory.createSecretAchievement(7, "Last One!", "Buy 1 c7.", "Filled", () => c7.level > 0);
-    achievement9 = theory.createSecretAchievement(8, "You Win!!!", "Buy 1 c8.", "Ohu Do You?", () => c8.level > 0);
+    achievement7 = theory.createSecretAchievement(6, "What This Happend?", "Buy 2 c6.", "Filled", () => c6.level > 1);
+    achievement8 = theory.createSecretAchievement(7, "Last One!", "Buy 2 c7.", "Filled", () => c7.level > 1);
+    achievement9 = theory.createSecretAchievement(8, "You Win!!!", "Buy 2 c8.", "Ohu Do You?", () => c8.level > 1);
     achievement10 = theory.createSecretAchievement(9, "100 Monkey", "aaaaaaaaaaa", "|_Huh_|", () => currency_M.value > 100);
     achievement11 = theory.createSecretAchievement(10, "MM", "huh", "did look?", () => currency_M.value > 1e6);
     achievement12 = theory.createSecretAchievement(11, "Trillion _/|", "number", "spend?", () => currency_M.value > 1e12);
